@@ -5,13 +5,14 @@ import PropTypes from "prop-types";
 function ProductList(props) {
   return (
     <React.Fragment>
-    {props.productList.map((product) => (
-      <Product
-        name={product.name}
-        price={product.price}
-        quantity={product.quantity}
+      {props.currentProductList.map((product) => (
+        <Product
+          name={product.name}
+          price={product.price}
+          quantity={product.quantity}
+          key={product.key}
         />
-    ))}
+      ))}
     </React.Fragment>
   );
 }
