@@ -10,7 +10,7 @@ function ProductList(props) {
           name={product.name}
           price={product.price}
           quantity={product.quantity}
-          key={product.key}
+          key={product.id}
         />
       ))}
     </React.Fragment>

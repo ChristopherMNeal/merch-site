@@ -1,6 +1,5 @@
 import React from "react";
 import ProductList from "./ProductList";
-import { v4 } from "uuid";
 import ProductDetails from "./ProductDetails";
 import NewProductForm from "./NewProductForm";
 // import Product from "./Product";
@@ -9,30 +8,8 @@ class ProductController extends React.Component {
   constructor() {
     super();
     this.state = {
-      mainProductList: [
-        {
-          name: "cat toy",
-          price: 3.55,
-          quantity: 15,
-          description: "a string",
-          key: v4(),
-        },
-        {
-          name: "dog toy",
-          price: 4,
-          quantity: 5,
-          description: "a ball",
-          key: v4(),
-        },
-        {
-          name: "turtle toy",
-          price: 9,
-          quantity: 25,
-          description: "a tiny jetski",
-          key: v4(),
-        },
-      ],
-      pageShowing: 1 
+      mainProductList: [],
+      pageShowing: 0
     };
   }
 
@@ -54,6 +31,10 @@ Product list page - 1 -> button => Form(2), (LATER: button=> ech product)
 New Product Form - 2 -> button => List(1)
   */
 
+  handleAddingNewProductToList = (newProduct) => {
+    const newMainProductList = this.state.mainProductList.concat(newProduct);
+    this.setState({mainProductList: newMainProductList, pageShowing: 1});
+  }
 
   render() {
     let pageShowing = this.state.pageShowing;
@@ -63,15 +44,10 @@ New Product Form - 2 -> button => List(1)
       pageShowing =  <ProductList currentProductList={currentProductList} />
       buttonText = "Create new product"
     } else if (this.state.pageShowing === 2) {
-      pageShowing = <NewProductForm />
+      pageShowing = <NewProductForm  onNewProductCreation={this.handleAddingNewProductToList} />
       buttonText = "Go back"
     } else {
-      pageShowing = <ProductDetails   
-      name={currentProductList[0].name}
-      price={currentProductList[0].price}
-      quantity={currentProductList[0].quantity}
-      description={currentProductList[0].description}
-      />
+      pageShowing = <ProductDetails />
       buttonText = "Create new product"
     }
     return (

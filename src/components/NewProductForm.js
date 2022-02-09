@@ -1,18 +1,14 @@
 import React from "react";
-// import { v4 } from "uuid";
+import { v4 } from "uuid";
 import PropTypes from "prop-types";
 
 function NewProductForm(props){
 
   function handleNewProductFormSubmission(event) {
     event.preventDefault();
-    console.log({
-      names: event.target.name.value, 
-      prices: event.target.price.value,
-      quantities: event.target.quantity.value,
-      description: event.target.description.value
-    });
-  }
+    props.onNewProductCreation({name: event.target.name.value, price: parseInt(event.target.price.value), quantity: parseInt(event.target.quantity.value), description: event.target.description.value, id: v4()})
+    };
+
 
   // event.target.names.value,
   return (
@@ -35,7 +31,11 @@ function NewProductForm(props){
       <button type='submit'>Create</button>
     </form>
   )
-
 }
+
+NewProductForm.propTypes = {
+  onNewProductCreation: PropTypes.func
+};
+
 
 export default NewProductForm;
