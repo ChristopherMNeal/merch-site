@@ -2,12 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Product(props) {
+  // function onClickFunction() {
+  //   props.onProductClick(props.id);
+  // }
+
   return (
     <React.Fragment>
       <h3>
         {props.name} - ${props.price}
       </h3>
       <p>quantity: {props.quantity}</p>
+      {/* <button onClick={onClickFunction}>See Details</button> */}
     </React.Fragment>
   );
 }

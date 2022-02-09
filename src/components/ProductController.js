@@ -2,14 +2,19 @@ import React from "react";
 import ProductList from "./ProductList";
 import ProductDetails from "./ProductDetails";
 import NewProductForm from "./NewProductForm";
-// import Product from "./Product";
 
 class ProductController extends React.Component {
   constructor() {
     super();
     this.state = {
       mainProductList: [],
-      pageShowing: 0
+      pageShowing: 1,
+      currentProductInDetails: {
+        name: "",
+        price: 0,
+        quantity: 0,
+        description: ""
+      }
     };
   }
 
@@ -36,18 +41,27 @@ New Product Form - 2 -> button => List(1)
     this.setState({mainProductList: newMainProductList, pageShowing: 1});
   }
 
+  handleChangingDetailView = (productKey) => {
+    const newProduct = this.state.mainProductList.filter(product => product.id === productKey);
+    this.setState({currentProductInDetails: newProduct}, {pageShowing: 0});
+  }
+
   render() {
     let pageShowing = this.state.pageShowing;
     let buttonText = null;
     const currentProductList = this.state.mainProductList;
     if (this.state.pageShowing === 1) {
-      pageShowing =  <ProductList currentProductList={currentProductList} />
+      pageShowing =  <ProductList currentProductList={currentProductList} onProductClick={this.handleChangingDetailView} />
       buttonText = "Create new product"
     } else if (this.state.pageShowing === 2) {
       pageShowing = <NewProductForm  onNewProductCreation={this.handleAddingNewProductToList} />
       buttonText = "Go back"
     } else {
-      pageShowing = <ProductDetails />
+      pageShowing = <ProductDetails 
+      name={this.state.currentProductInDetails.name} 
+      price={this.state.currentProductInDetails.price} 
+      quantity={this.state.currentProductInDetails.quantity} 
+      description={this.state.currentProductInDetails.description}/>
       buttonText = "Create new product"
     }
     return (

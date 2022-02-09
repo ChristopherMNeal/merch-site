@@ -7,10 +7,11 @@ function ProductList(props) {
     <React.Fragment>
       {props.currentProductList.map((product) => (
         <Product
+          onProductClick={props.onProductClick}
           name={product.name}
           price={product.price}
           quantity={product.quantity}
-          key={product.id}
+          id={product.id}
         />
       ))}
     </React.Fragment>
