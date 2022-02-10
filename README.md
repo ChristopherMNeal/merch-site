@@ -1,6 +1,6 @@
 # _Merch Site_
 
-#### _React week 2 Intro to React practice project for Epicodus Bootcamp_
+#### _React week 2 React Fundamentals practice project for Epicodus Bootcamp_
 
 #### Created By: **Christopher Neal, Anna Pittman, Ella Tanttu, & Christy Welch**
 
@@ -16,7 +16,7 @@
 
 ## Description
 
-_This project was created for Epicodus bootcamp to show proficiency in React basics. The application is for a web store to list their products with descriptions, prices, and quantities. The user has full CRUD functionality on the products._
+_This project was created for Epicodus bootcamp to show proficiency in React Fundamentals. The application is for a web store to list their products with descriptions, prices, and quantities. The user has full CRUD functionality on the products._
 
 ## Project Layout Diagram
 
