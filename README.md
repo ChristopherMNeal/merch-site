@@ -18,6 +18,10 @@
 
 _This project was created for Epicodus bootcamp to show proficiency in React basics. The application is for a web store to list their products with descriptions, prices, and quantities. The user has full CRUD functionality on the products._
 
+## Project Layout Diagram
+
+![project-diagram](./project-diagram.png)
+
 ## Setup/Installation Requirements
 
 - _React version 3.2.0_
