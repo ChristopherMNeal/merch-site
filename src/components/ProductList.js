@@ -12,7 +12,7 @@ function ProductList(props) {
           price={product.price}
           quantity={product.quantity}
           id={product.id}
-        />
+          key={product.id}/>
       ))}
     </React.Fragment>
   );
@@ -20,6 +20,7 @@ function ProductList(props) {
 
 ProductList.propTypes = {
   productList: PropTypes.array,
+  onProductClick: PropTypes.func
 };
 
 export default ProductList;

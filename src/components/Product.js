@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Product(props) {
-  // function onClickFunction() {
-  //   props.onProductClick(props.id);
-  // }
+  function onClickFunction() {
+    props.onProductClick(props.id);
+  }
 
   return (
     <React.Fragment>
@@ -13,7 +13,7 @@ function Product(props) {
       </h3>
       {props.quantity === 0 ? <p>Out of Stock</p>
       :<p>quantity: {props.quantity}</p>}
-      {/* <button onClick={onClickFunction}>See Details</button> */}
+      <button onClick={onClickFunction}>See Details</button>
     </React.Fragment>
   );
 }
@@ -22,6 +22,7 @@ Product.propTypes = {
   name: PropTypes.string,
   price: PropTypes.number,
   quantity: PropTypes.number,
+  onProductClick: PropTypes.func
 };
 
 export default Product;
