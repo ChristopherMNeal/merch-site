@@ -20,11 +20,13 @@ function NewProductForm(props){
       <label htmlFor="price">Product Price</label>
       <input
         type='number'
-        name='price'/>
+        name='price'
+        min='0'/>
       <label htmlFor="quanity">Current Product Qty</label>
       <input
         type='number'
-        name='quantity'/>
+        name='quantity'
+        min='0'/>
       <textarea
         name='description'
         placeholder='Product Description'/>

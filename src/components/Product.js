@@ -11,7 +11,8 @@ function Product(props) {
       <h3>
         {props.name} - ${props.price}
       </h3>
-      <p>quantity: {props.quantity}</p>
+      {props.quantity === 0 ? <p>Out of Stock</p>
+      :<p>quantity: {props.quantity}</p>}
       {/* <button onClick={onClickFunction}>See Details</button> */}
     </React.Fragment>
   );
