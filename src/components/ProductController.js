@@ -2,6 +2,7 @@ import React from "react";
 import ProductList from "./ProductList";
 import ProductDetails from "./ProductDetails";
 import NewProductForm from "./NewProductForm";
+import EditProductForm from "./EditProductForm";
 
 class ProductController extends React.Component {
   constructor() {
@@ -10,11 +11,16 @@ class ProductController extends React.Component {
       mainProductList: [],
       pageShowing: 1,
       currentProductInDetails: null,
+      editing: false,
     };
   }
 
   handleClick = () => {
-    if (this.state.pageShowing === 0) {
+    if (this.state.editing) {
+      this.setState((prevState) => ({
+        editing: false,
+      }));
+    } else if (this.state.pageShowing === 0) {
       this.setState((prevState) => ({
         pageShowing: 1,
         currentProductInDetails: null,
@@ -48,22 +54,56 @@ New Product Form - 2 -> button => List(1)
     this.setState({ currentProductInDetails: newProduct, pageShowing: 0 });
   };
 
+  handleDeletingProduct = (id) => {
+    const newMainProductList = this.state.mainProductList.filter(
+      (product) => product.id !== id
+    );
+    this.setState({
+      mainProductList: newMainProductList,
+      currentProductInDetails: null,
+      pageShowing: 1,
+    });
+  };
+
+  handleEditClick = () => {
+    this.setState({ editing: true });
+  };
+
+  handleEditingProductInList = (productToEdit) => {
+    const editedMainProductList = this.state.mainProductList
+      .filter((product) => product.id !== this.state.currentProductInDetails.id)
+      .concat(productToEdit);
+    this.setState({
+      mainProductList: editedMainProductList,
+      editing: false,
+      currentProductInDetails: null,
+      pageShowing: 1
+    });
+  };
+
   render() {
-    let pageShowing = this.state.pageShowing;
+    let currentPage = null;
     let buttonText = null;
     const currentProductList = this.state.mainProductList;
-    if (this.state.currentProductInDetails != null) {
-      pageShowing = (
+    if (this.state.editing) {
+      currentPage = (
+        <EditProductForm
+          product={this.state.currentProductInDetails}
+          onEditProduct={this.handleEditingProductInList}
+        />
+      );
+      buttonText = "Return to Ticket List";
+    } else if (this.state.currentProductInDetails != null) {
+      currentPage = (
         <ProductDetails
-          name={this.state.currentProductInDetails.name}
-          price={this.state.currentProductInDetails.price}
-          quantity={this.state.currentProductInDetails.quantity}
-          description={this.state.currentProductInDetails.description}
+          product={this.state.currentProductInDetails}
+          onClickingDelete={this.handleDeletingProduct}
+          onClickingEdit={this.handleEditClick}
         />
       );
       buttonText = "Go back";
     } else if (this.state.pageShowing === 1) {
-      pageShowing = (
+      currentPage = (
         <ProductList
           currentProductList={currentProductList}
           onProductClick={this.handleChangingDetailView}
@@ -71,7 +111,7 @@ New Product Form - 2 -> button => List(1)
       );
       buttonText = "Create new product";
     } else if (this.state.pageShowing === 2) {
-      pageShowing = (
+      currentPage = (
         <NewProductForm
           onNewProductCreation={this.handleAddingNewProductToList}
         />
@@ -80,7 +120,7 @@ New Product Form - 2 -> button => List(1)
     }
     return (
       <React.Fragment>
-        {pageShowing}
+        {currentPage}
         <button onClick={this.handleClick}>{buttonText}</button>
       </React.Fragment>
     );

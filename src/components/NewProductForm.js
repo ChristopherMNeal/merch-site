@@ -1,6 +1,7 @@
 import React from "react";
 import { v4 } from "uuid";
 import PropTypes from "prop-types";
+import ReusableForm from "./ReusableForm";
 
 function NewProductForm(props){
 
@@ -12,26 +13,11 @@ function NewProductForm(props){
 
   // event.target.names.value,
   return (
-    <form onSubmit={handleNewProductFormSubmission}>
-      <input
-        type='text'
-        name='name'
-        placeholder='Product Name'/>
-      <label htmlFor="price">Product Price</label>
-      <input
-        type='number'
-        name='price'
-        min='0'/>
-      <label htmlFor="quanity">Current Product Qty</label>
-      <input
-        type='number'
-        name='quantity'
-        min='0'/>
-      <textarea
-        name='description'
-        placeholder='Product Description'/>
-      <button type='submit'>Create</button>
-    </form>
+    <React.Fragment>
+      <ReusableForm
+        formSubmissionHandler={handleNewProductFormSubmission}
+        buttonText="Create"/>
+    </React.Fragment>
   )
 }
 
